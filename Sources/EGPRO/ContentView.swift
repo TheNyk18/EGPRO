@@ -2,16 +2,37 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var model: EQModel
+    @AppStorage("transparency") private var transparency: Double = 0.45
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             header
             presetPicker
             bands
+            transparencyRow
             footer
         }
         .padding(16)
         .frame(width: 380)
+        .background(GlassBackground(transparency: transparency))
+    }
+
+    // MARK: - Cat de transparent e fundalul
+
+    private var transparencyRow: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "circle.lefthalf.filled")
+                .foregroundStyle(.secondary)
+            Text("Transparență")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Slider(value: $transparency, in: 0...1)
+                .controlSize(.small)
+            Text("\(Int((transparency * 100).rounded()))%")
+                .font(.caption.monospacedDigit())
+                .foregroundStyle(.secondary)
+                .frame(width: 36, alignment: .trailing)
+        }
     }
 
     // MARK: - Sus: nume, pornit/oprit, unde se aude

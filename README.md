@@ -15,6 +15,7 @@
 - **Setări gata făcute**: Bas puternic, Bas extrem, Voce clară, Înalte, Petrecere, Rock, Pop, Căști, Noaptea.
 - **Merge cu orice aplicație** care scoate sunet — nu trebuie conectat niciun cont.
 - **Fără distorsiuni**: când ridici o bandă, volumul general scade automat puțin ca sunetul să nu se „spargă".
+- **Fundal transparent** (sticlă mată), cu glisor ca să alegi cât de transparent.
 - Când conectezi căștile sau schimbi boxele, EGPRO trece singur pe noua ieșire.
 - Când îl oprești sau îl închizi, sunetul Mac-ului revine exact cum era.
 
