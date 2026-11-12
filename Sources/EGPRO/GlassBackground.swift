@@ -18,7 +18,7 @@ struct GlassBackground: NSViewRepresentable {
 }
 
 final class GlassView: NSVisualEffectView {
-    var transparency: Double = 0.4 {
+    var transparency: Double = 0.65 {
         didSet { applyTransparency() }
     }
 
@@ -45,7 +45,7 @@ final class GlassView: NSVisualEffectView {
 
     private func applyTransparency() {
         let t = min(max(transparency, 0), 1)
-        alphaValue = CGFloat(1.0 - t * 0.8)
+        alphaValue = CGFloat(1.0 - t * 0.9)
 
         guard let window else { return }
         window.isOpaque = false

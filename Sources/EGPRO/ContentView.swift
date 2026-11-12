@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var model: EQModel
-    @AppStorage("transparency") private var transparency: Double = 0.45
+    @AppStorage("transparency") private var transparency: Double = 0.65
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
