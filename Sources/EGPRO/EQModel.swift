@@ -45,7 +45,7 @@ final class EQModel: ObservableObject {
         pushToEngine()
 
         observer = NotificationCenter.default.addObserver(
-            forName: Notification.Name(EGEngineDidChangeNotification),
+            forName: EGEngineDidChangeNotification,
             object: nil,
             queue: .main
         ) { [weak self] _ in
