@@ -1,0 +1,49 @@
+name: Build
+
+# La fiecare modificare pe "main", GitHub construieste EGPRO.dmg pe un Mac.
+# Daca versiunea din fisierul VERSION e noua, face si un Release cu .dmg-ul.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versiunea Xcode / Swift
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Construieste aplicatia si DMG-ul
+        run: |
+          chmod +x scripts/package.sh
+          ./scripts/package.sh
+
+      - name: Pastreaza DMG-ul (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: EGPRO-dmg
+          path: build/EGPRO.dmg
+
+      - name: Release (daca e versiune noua)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="v$(tr -d '[:space:]' < VERSION)"
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION exista deja; actualizez fisierul."
+            gh release upload "$VERSION" build/EGPRO.dmg --clobber
+          else
+            gh release create "$VERSION" build/EGPRO.dmg \
+              --title "EGPRO $VERSION" \
+              --notes-file RELEASE_NOTES.md \
+              --target "$GITHUB_SHA"
+          fi
